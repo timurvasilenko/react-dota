@@ -90,7 +90,6 @@ const RandomHeroPage = () => {
             const startTime = performance.now();
 
             const animate = (currentTime: number) => {
-                console.log("A");
                 const elapsed = currentTime - startTime;
                 const t = Math.min(1, elapsed / duration);
                 const eased = easeOutCubic(t);
@@ -145,12 +144,6 @@ const RandomHeroPage = () => {
                                 idx === ROLL_TARGET_INDEX &&
                                     !isRollFinished &&
                                     "pointer-events-none"
-                                // idx === ROLL_TARGET_INDEX &&
-                                //     isRollFinished &&
-                                //     "scale-120",
-                                // idx !== ROLL_TARGET_INDEX &&
-                                //     isRollFinished &&
-                                //     "scale-95"
                             )}
                             initial={{
                                 opacity: 0,
