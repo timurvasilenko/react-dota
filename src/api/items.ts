@@ -8,7 +8,7 @@ const RawItemsModel = z.record(
         dname: z.string().optional(),
         img: z.string(),
         cost: z.number().nullish(),
-        components: z.array(z.string()).nullish()
+        components: z.array(z.string()).nullish(),
     })
 );
 
@@ -18,8 +18,8 @@ const ItemModel = z.object({
     dname: z.string().optional(),
     img: z.string(),
     cost: z.number().nullish(),
-    components: z.array(z.string()).nullish()
-    //qual: z.string(),
+    components: z.array(z.string()).nullish(),
+    // qual: z.string(),
 });
 
 const ItemsListModel = z.array(ItemModel);
