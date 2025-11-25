@@ -1,5 +1,4 @@
 import { LoaderCircleIcon } from "lucide-react";
-import { motion } from "motion/react";
 
 const LoadingBadge = () => {
     return (
