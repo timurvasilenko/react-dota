@@ -33,7 +33,14 @@ function App() {
             </NavigationMenu>
 
             <Routes>
-                <Route path="/" element={<div>Home</div>} />
+                <Route
+                    path="/"
+                    element={
+                        <div className="text-lg mt-10 text-primary">
+                            Ozh icha gluth izh sol
+                        </div>
+                    }
+                />
                 <Route path="/random-hero" element={<RandomHeroPage />} />
                 <Route path="/ruiner" element={<RuinerPage />} />
             </Routes>

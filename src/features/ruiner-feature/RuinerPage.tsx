@@ -172,6 +172,7 @@ const RuinerPage = () => {
             534, //Witch Blade
             569, //Orb of Corrosion
             596, //Falcon Blade
+            908, //Wraith Pact
             1095, //Lunar Crest
             1107, //Phylactery
             1128, //Pavise
