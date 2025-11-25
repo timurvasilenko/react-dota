@@ -1,5 +1,5 @@
-const API_DOMAIN = "https://api.opendota.com";
 import * as z from "zod";
+import { OPENDOTA_API } from "./base-urls";
 
 const HeroModel = z.object({
     id: z.number(),
@@ -16,10 +16,11 @@ export type HeroType = z.infer<typeof HeroModel>;
 export type HeroListType = z.infer<typeof HeroesListModel>;
 
 export const fetchHeroes = async () => {
-    const res = await fetch(`${API_DOMAIN}/api/heroes`);
+    const URL = `${OPENDOTA_API}/heroes`;
+    const res = await fetch(URL);
 
     if (!res.ok) {
-        throw new Error("Failed to load data");
+        throw new Error(`Failed to load data from ${URL}`);
     }
 
     const resJson = await res.json();
@@ -101,10 +102,11 @@ export type HeroStatsType = z.infer<typeof HeroStatsModel>;
 export type HeroStatsListType = z.infer<typeof HeroStatsListModel>;
 
 export const fetchHeroStats = async () => {
-    const res = await fetch(`${API_DOMAIN}/api/heroStats`);
+    const URL = `${OPENDOTA_API}/heroStats`;
+    const res = await fetch(URL);
 
     if (!res.ok) {
-        throw new Error("Failed to load data");
+        throw new Error(`Failed to load data from ${URL}`);
     }
 
     const resJson = await res.json();
