@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import RandomHeroPage from "@/features/random-hero-featrue/RandomHeroPage";
 import RuinerPage from "@/features/ruiner-feature/RuinerPage";
+import TestPage from "@/features/test-feature/TestPage";
 import { Routes, Route, NavLink } from "react-router";
 
 function App() {
@@ -29,21 +30,28 @@ function App() {
                             <NavigationMenuLink>Ruiner</NavigationMenuLink>
                         </NavLink>
                     </NavigationMenuItem>
+                    {/* <NavigationMenuItem>
+                        <NavLink to="/test">
+                            <NavigationMenuLink>TEST</NavigationMenuLink>
+                        </NavLink>
+                    </NavigationMenuItem> */}
                 </NavigationMenuList>
             </NavigationMenu>
-
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <div className="text-lg mt-10 text-primary">
-                            Ozh icha gluth izh sol
-                        </div>
-                    }
-                />
-                <Route path="/random-hero" element={<RandomHeroPage />} />
-                <Route path="/ruiner" element={<RuinerPage />} />
-            </Routes>
+            <div className="w-full max-w-[1200px]">
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <div className="text-lg mt-10 text-primary">
+                                Ozh icha gluth izh sol
+                            </div>
+                        }
+                    />
+                    <Route path="/random-hero" element={<RandomHeroPage />} />
+                    <Route path="/ruiner" element={<RuinerPage />} />
+                    <Route path="/test" element={<TestPage />} />
+                </Routes>
+            </div>
         </div>
     );
 }

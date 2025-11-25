@@ -17,7 +17,7 @@ const RandomCard = ({
     const uid = useId();
     return (
         <motion.div
-            className="flex flex-col gap-4 border-accent border-2 p-6 w-70 rounded-xl"
+            className="flex flex-col gap-4 w-55 relative"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -36,9 +36,11 @@ const RandomCard = ({
             }}
         >
             <HeroCard hero={hero} onHeroClick={() => {}} />
-            <div className="flex flex-col gap-2">
-                <span>ITEMS</span>
 
+            {/* <div className="flex w-full justify-center">
+                <div className="w-40 h-0.5 bg-accent rounded-full"></div>
+            </div> */}
+            <div className="flex flex-col gap-2">
                 {items.map((item) => (
                     <ItemCard item={item} key={`${uid}-${item.id}`} />
                 ))}

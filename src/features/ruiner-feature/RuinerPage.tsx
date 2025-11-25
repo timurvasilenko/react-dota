@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { useEffect, useId, useState } from "react";
 import RandomCard from "./components/RandomCard";
 import LoadingBadge from "@/components/LoadingBadge";
+import { DicesIcon } from "lucide-react";
 
 const HEROES_COUNT = 4;
 const ITEMS_PER_HERO = 6;
@@ -71,16 +72,6 @@ const RuinerPage = () => {
     }, [isItemsError]);
 
     const getRandomItems = () => {
-        // TOFIX тут есть какой-то странный баг. Иногда в одном из массивов вместо айтема подсовывается undefined. Из-за этого ломается страница.
-
-        /*
-            TODO нужно отсеивать лишние предметы
-            Пока что в голову приходит следующие способы, которые можно комбинировать:
-            1) Проверка названия. Например, у чар name начинается с "enhancement_", а у рецептов с "recipe_".
-            2) Исключить айтемы, у которых пустое поле dname (null/undefined). Такие, как я понимаю, не используются в игре в данный момент.
-            4) Можно отсеивать все предметы с cost = 0, а может и ещё по каким-то полям, которые я изначально не добавил в модель.
-            3) Составить чёрный список айдишников для предметов, которые никак не исключить по названию.
-        */
         if (items) {
             let newRandomItems = [];
             const filteredItems = filterItems(items);
@@ -225,7 +216,7 @@ const RuinerPage = () => {
     const uid = useId();
 
     return (
-        <div className="max-w-[1200px] flex flex-col gap-2 items-center my-6">
+        <div className="flex flex-col gap-4 items-center my-6">
             {isDataLoading() && <LoadingBadge />}
             {isDataError() && "Data fetching error!"}
             {!isDataLoading() && !isDataError() && (
@@ -243,6 +234,7 @@ const RuinerPage = () => {
                         }}
                     >
                         <Button onClick={shuffle} className="cursor-pointer">
+                            <DicesIcon />
                             To Hell and Back!
                         </Button>
                     </motion.div>
@@ -257,13 +249,13 @@ const RuinerPage = () => {
                                 bounce: 0.5,
                             },
                         }}
-                        className="p-4 flex gap-10"
+                        className="p-4 flex flex-wrap items-center justify-center gap-12"
                     >
                         {randomHeroes.map((hero, heroIdx) => (
                             <RandomCard
                                 hero={hero}
                                 items={randomItems[heroIdx]}
-                                key={`${uid}-${hero.id}`}
+                                key={`${uid}-${hero.id}-${randomItems[heroIdx][1].id}`}
                                 nth={heroIdx}
                             />
                         ))}
