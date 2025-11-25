@@ -19,7 +19,7 @@ const ItemModel = z.object({
     img: z.string(),
     cost: z.number().nullish(),
     components: z.array(z.string()).nullish()
-    // qual: z.string(),
+    //qual: z.string(),
 });
 
 const ItemsListModel = z.array(ItemModel);
