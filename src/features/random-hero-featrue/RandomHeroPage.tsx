@@ -2,7 +2,7 @@ import { fetchHeroStats, type HeroStatsType } from "@/api/heroes";
 import { useQuery } from "@tanstack/react-query";
 import HeroList from "./components/HeroList";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import HeroCard from "../../components/HeroCard";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,13 @@ import { CircleQuestionMarkIcon, DicesIcon } from "lucide-react";
 import { getUniqueRandomIntegers } from "@/utils/arrays";
 import { cn } from "@/lib/utils";
 
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const easeOutCubic = (t: number) => {
+    const a = 1 - Math.pow(1 - t, 3);
+    if (a > 0.9998) {
+        return 1;
+    }
+    return a;
+};
 
 const ROLL_FILLERS_COUNT = 30;
 const ROLL_TARGET_INDEX = ROLL_FILLERS_COUNT / 2;
@@ -68,6 +74,12 @@ const RandomHeroPage = () => {
     };
 
     const roll = () => {
+        updateRandomHeroes();
+        setRollFinished(false);
+        animateRoll();
+    };
+
+    const animateRoll = () => {
         const carousel = carouselRef.current;
         if (!carousel) return;
 
@@ -78,15 +90,12 @@ const RandomHeroPage = () => {
 
         carousel.scrollLeft = 0;
 
-        updateRandomHeroes();
-        setRollFinished(false);
-
         // Ждём следующего кадра, чтобы DOM обновился
         requestAnimationFrame(() => {
             const target = carousel.scrollWidth / 2 - carousel.clientWidth / 2;
             const start = carousel.scrollLeft;
             const distance = target - start;
-            const duration = 5000; // 7 секунд
+            const duration = 4500; // 7 секунд
             const startTime = performance.now();
 
             const animate = (currentTime: number) => {
@@ -106,6 +115,23 @@ const RandomHeroPage = () => {
             animationRef.current = requestAnimationFrame(animate);
         });
     };
+
+    useEffect(() => {
+        if (carouselRef.current) {
+            const resizeObserver = new ResizeObserver(() => {
+                if (!isRollFinished) {
+                    animateRoll();
+                }
+                console.log("RESIZE", isRollFinished);
+            });
+
+            resizeObserver.observe(carouselRef.current);
+
+            return () => {
+                resizeObserver.disconnect();
+            };
+        }
+    }, [carouselRef.current, isRollFinished]);
 
     const uid = useId();
 

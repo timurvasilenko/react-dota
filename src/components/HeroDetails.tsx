@@ -62,11 +62,6 @@ const HeroDetails = ({
                         </SheetTitle>
                         <SheetDescription className="flex flex-col gap-2">
                             <div className="w-full flex flex-col gap-1">
-                                {/* <img
-                                        src={`${STEAM_CDN_API}${heroInfo.img}`}
-                                        alt={heroInfo.localized_name}
-                                        className="rounded-xl border-2"
-                                    /> */}
                                 {heroRenderURLs && (
                                     <video
                                         poster={heroRenderURLs.poster}

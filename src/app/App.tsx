@@ -1,13 +1,21 @@
+import { Button } from "@/components/ui/button";
 import {
     NavigationMenu,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import RandomHeroPage from "@/features/random-hero-featrue/RandomHeroPage";
 import RuinerPage from "@/features/ruiner-feature/RuinerPage";
 import TestPage from "@/features/test-feature/TestPage";
+import { cn } from "@/lib/utils";
 import { Routes, Route, NavLink } from "react-router";
+
+const getClassesByActiveState = ({ isActive }: { isActive: boolean }) =>
+    cn(
+        isActive &&
+            "focus:bg-accent hover:bg-accent bg-accent/50 text-accent-foreground",
+        "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-ring/50 [&_svg:not([class*='text-'])]:text-muted-foreground flex flex-col gap-1 rounded-sm p-2 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 [&_svg:not([class*='size-'])]:size-4"
+    );
 
 function App() {
     return (
@@ -21,18 +29,24 @@ function App() {
                 </NavLink>
                 <NavigationMenuList className="flex gap-2">
                     <NavigationMenuItem>
-                        <NavLink to="/random-hero">
-                            <NavigationMenuLink>Random Hero</NavigationMenuLink>
+                        <NavLink
+                            to="/random-hero"
+                            className={getClassesByActiveState}
+                        >
+                            Random Hero
                         </NavLink>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <NavLink to="/ruiner">
-                            <NavigationMenuLink>Ruiner</NavigationMenuLink>
+                        <NavLink
+                            to="/ruiner"
+                            className={getClassesByActiveState}
+                        >
+                            Ruiner
                         </NavLink>
                     </NavigationMenuItem>
                     {/* <NavigationMenuItem>
-                        <NavLink to="/test">
-                            <NavigationMenuLink>TEST</NavigationMenuLink>
+                        <NavLink to="/test" className={getClassesByActiveState}>
+                            TEST
                         </NavLink>
                     </NavigationMenuItem> */}
                 </NavigationMenuList>
